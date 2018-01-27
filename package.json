@@ -7,8 +7,9 @@
   "main": "dist/rollup-plugin-svg-sprite.cjs.js",
   "scripts": {
     "lint": "eslint src",
+    "clean": "rimraf dist",
     "build": "bili --buble.target.node 6",
-    "prepublishOnly": "yarn lint && yarn build"
+    "prepublishOnly": "yarn lint && yarn clean && yarn build"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
@@ -19,7 +20,8 @@
     "bili": "^2.2.3",
     "eslint": "^4.16.0",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "rimraf": "^2.6.2"
   },
   "files": [
     "src",
