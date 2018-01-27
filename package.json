@@ -4,14 +4,19 @@
   "version": "0.1.0",
   "author": "Vlad Shcherbin <vlad.shcherbin@gmail.com>",
   "repository": "VladShcherbin/rollup-plugin-svg-sprite",
-  "main": "src/index.js",
-  "scripts": {},
+  "main": "dist/rollup-plugin-svg-sprite.cjs.js",
+  "scripts": {
+    "lint": "eslint src",
+    "build": "bili --buble.target.node 6",
+    "prepublishOnly": "yarn lint && yarn build"
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "pretty": "^2.0.0",
     "rollup-pluginutils": "^2.0.1"
   },
   "devDependencies": {
+    "bili": "^2.2.3",
     "eslint": "^4.16.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0"
