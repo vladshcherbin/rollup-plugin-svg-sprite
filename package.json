@@ -1,0 +1,25 @@
+{
+  "name": "rollup-plugin-svg-sprite",
+  "description": "Create svg sprite from svg files using Rollup",
+  "version": "0.1.0",
+  "author": "Vlad Shcherbin <vlad.shcherbin@gmail.com>",
+  "repository": "VladShcherbin/rollup-plugin-svg-sprite",
+  "main": "src/index.js",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "files": [
+    "src",
+    "readme.md"
+  ],
+  "keywords": [
+    "rollup",
+    "plugin",
+    "svg",
+    "sprite",
+    "extract",
+    "create",
+    "generate"
+  ],
+  "license": "MIT"
+}
