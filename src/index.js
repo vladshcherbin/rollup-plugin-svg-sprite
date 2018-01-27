@@ -3,6 +3,7 @@ import path from 'path'
 import { createFilter } from 'rollup-pluginutils'
 import cheerio from 'cheerio'
 import pretty from 'pretty'
+import { minify } from 'html-minifier'
 
 function loadXml(xml) {
   return cheerio.load(xml, { xmlMode: true })
@@ -30,7 +31,7 @@ function createSprite(symbols, prettify) {
 
   return prettify
     ? pretty(element.html())
-    : element.html()
+    : minify(element.html(), { collapseWhitespace: true })
 }
 
 export default function svgSprite(options = {}) {
