@@ -55,7 +55,7 @@ export default function svgSprite(options = {}) {
         map: { mappings: '' }
       }
     },
-    onwrite: (details) => {
+    generateBundle: (details) => {
       if (symbols.size) {
         const outputFolderPath = options.outputFolder || path.dirname(details.file)
 
