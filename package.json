@@ -24,6 +24,9 @@
     "eslint-plugin-import": "^2.8.0",
     "rimraf": "^2.6.2"
   },
+  "peerDependencies": {
+    "rollup": ">=1.0.0"
+  },
   "files": [
     "dist",
     "readme.md"
