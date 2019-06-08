@@ -1,7 +1,7 @@
 {
   "name": "rollup-plugin-svg-sprite",
   "description": "Create external svg sprite from your bundle using Rollup",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Vlad Shcherbin <vlad.shcherbin@gmail.com>",
   "repository": "VladShcherbin/rollup-plugin-svg-sprite",
   "main": "dist/rollup-plugin-svg-sprite.cjs.js",
