@@ -3,7 +3,7 @@
   "description": "Create external svg sprite from your bundle using Rollup",
   "version": "0.3.0",
   "author": "Vlad Shcherbin <vlad.shcherbin@gmail.com>",
-  "repository": "VladShcherbin/rollup-plugin-svg-sprite",
+  "repository": "vladshcherbin/rollup-plugin-svg-sprite",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "scripts": {
@@ -42,12 +42,15 @@
   ],
   "keywords": [
     "rollup",
-    "plugin",
+    "rollup-plugin",
     "svg",
     "sprite",
-    "extract",
+    "svg-sprite",
+    "svgo",
     "create",
-    "generate"
+    "generate",
+    "extract",
+    "minify"
   ],
   "engines": {
     "node": ">=8.3"
