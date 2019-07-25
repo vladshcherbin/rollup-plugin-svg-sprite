@@ -35,6 +35,8 @@ export default function svgSprite(options = {}) {
     },
     plugins: [
       { cleanupIDs: false },
+      { removeDimensions: true },
+      { removeViewBox: false },
       ...Object.entries(rest).map(([plugin, params]) => ({ [plugin]: params }))
     ]
   })
