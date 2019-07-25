@@ -1,13 +1,18 @@
 # rollup-plugin-svg-sprite
 
-Create external svg sprite file from your bundle using Rollup.
+[![Build Status](https://travis-ci.org/vladshcherbin/rollup-plugin-svg-sprite.svg?branch=master)](https://travis-ci.org/vladshcherbin/rollup-plugin-svg-sprite)
+[![Codecov](https://codecov.io/gh/vladshcherbin/rollup-plugin-svg-sprite/branch/master/graph/badge.svg)](https://codecov.io/gh/vladshcherbin/rollup-plugin-svg-sprite)
+
+Create external svg sprite file from your bundle using Rollup and optimize it using [SVGO](https://github.com/svg/svgo).
 
 ## Installation
 
 ```bash
-npm install rollup-plugin-svg-sprite --save-dev
-# or
+# yarn
 yarn add rollup-plugin-svg-sprite -D
+
+# npm
+npm install rollup-plugin-svg-sprite -D
 ```
 
 ## Usage
@@ -19,20 +24,54 @@ import svgSprite from 'rollup-plugin-svg-sprite'
 export default {
   input: 'src/index.js',
   output: {
-    file: 'dist/main.js',
+    file: 'dist/app.js',
     format: 'iife'
   },
   plugins: [
     svgSprite({
-      // Optionally, set output folder where svg sprite will be saved
-      outputFolder: 'dist/public',
-
-      // Optionally, prettify svg sprite. Default false
-      prettify: true
+      outputFolder: 'dist/public'
     })
   ]
 }
 ```
+
+Next, import svg files in your project:
+
+```js
+import './svg/trash.svg'
+import './svg/user.svg'
+```
+
+### Configuration
+
+There are some useful options:
+
+#### outputFolder
+
+Type: `string`
+
+Folder where generated svg sprite will be saved.
+
+```js
+svgSprite({
+  outputFolder: 'dist/public'
+})
+```
+
+#### minify
+
+Type: `boolean` | Default: `true`
+
+Minify generated svg sprite.
+
+```js
+svgSprite({
+  outputFolder: 'dist/public',
+  minify: false
+})
+```
+
+All other options are passed to [svgo package](https://github.com/svg/svgo) which is used inside.
 
 ## License
 
