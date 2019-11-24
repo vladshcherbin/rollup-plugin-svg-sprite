@@ -7,22 +7,33 @@ function createSymbol(code, id) {
   const markup = cheerio.load(code, { xmlMode: true })
   const svgMarkup = markup('svg')
   const symbolId = svgMarkup.find('title').text() || id
+  const viewBox = svgMarkup.attr('viewBox')
 
   markup('svg').replaceWith('<symbol/>')
   markup('symbol')
     .attr('id', symbolId)
-    .attr('viewBox', svgMarkup.attr('viewBox'))
+    .attr('viewBox', viewBox)
     .append(svgMarkup.children())
 
-  return markup.xml('symbol')
+  return {
+    content: markup.xml('symbol'),
+    id: symbolId,
+    viewBox,
+  }
 }
 
 function createSprite(symbols) {
-  return `<svg xmlns="http://www.w3.org/2000/svg">${symbols.join('')}</svg>`
+  return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs>${symbols.join('')}</defs></svg>`
 }
 
 export default function svgSprite(options = {}) {
-  const { minify = true, outputFolder, ...rest } = options
+  const {
+    minify = true,
+    outputFolder,
+    publicPath = '',
+    spriteFilename = 'sprites.svg',
+    ...rest
+  } = options
 
   if (!outputFolder) {
     throw new Error('"outputFolder" must be set')
@@ -58,11 +69,12 @@ export default function svgSprite(options = {}) {
       }
 
       const filename = path.basename(id, '.svg')
+      const { content, viewBox, id: symbolId } = createSymbol(code, filename)
 
-      convertedSvgs.set(id, createSymbol(code, filename))
+      convertedSvgs.set(id, content)
 
       return {
-        code: ''
+        code: `export default {id: '${symbolId}_usage', viewBox: '${viewBox}', url: '${publicPath}${spriteFilename}#${symbolId}', toString() { return this.url },}`
       }
     },
     async writeBundle() {
@@ -71,7 +83,7 @@ export default function svgSprite(options = {}) {
         const { data } = await svgo.optimize(createSprite(symbols))
 
         await fs.ensureDir(outputFolder)
-        await fs.writeFile(`${outputFolder}/sprites.svg`, data)
+        await fs.writeFile(`${outputFolder}/${spriteFilename}`, data)
 
         loadedSvgs.clear()
       }
