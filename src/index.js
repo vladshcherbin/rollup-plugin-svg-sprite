@@ -7,11 +7,13 @@ function createSymbol(code, id) {
   const markup = cheerio.load(code, { xmlMode: true })
   const svgMarkup = markup('svg')
   const symbolId = svgMarkup.find('title').text() || id
+  const viewBox = svgMarkup.attr('viewBox')
+    || [0, 0, svgMarkup.attr('width'), svgMarkup.attr('height')].join(' ')
 
   markup('svg').replaceWith('<symbol/>')
   markup('symbol')
     .attr('id', symbolId)
-    .attr('viewBox', svgMarkup.attr('viewBox'))
+    .attr('viewBox', viewBox)
     .append(svgMarkup.children())
 
   return markup.xml('symbol')
