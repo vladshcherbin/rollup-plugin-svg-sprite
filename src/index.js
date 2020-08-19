@@ -65,6 +65,22 @@ export default function svgSprite(options = {}) {
         code: ''
       }
     },
+    async generateBundle(assetName, source) {
+      if (loadedSvgs.size) {
+        const symbols = [...convertedSvgs.values()]
+        const { data } = await svgo.optimize(createSprite(symbols))
+        await fs.ensureDir(outputFolder)
+        await fs.writeFile(`${outputFolder}/sprites.svg`, data)
+        this.emitFile(
+          {
+            type: "asset",
+            name: `${outputFolder}/sprites.svg`,
+            source: data,
+          },
+        )
+        loadedSvgs.clear()
+      }
+    },
     async writeBundle() {
       if (loadedSvgs.size) {
         const symbols = [...loadedSvgs.values()].map(id => convertedSvgs.get(id))
