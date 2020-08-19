@@ -29,7 +29,7 @@
     "eslint-plugin-import": "^2.22.0",
     "jest": "^24.8.0",
     "rimraf": "^2.6.3",
-    "rollup": "^1.17.0",
+    "rollup": "^2.26.4",
     "rollup-plugin-auto-external": "^2.0.0"
   },
   "peerDependencies": {
