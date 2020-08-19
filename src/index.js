@@ -70,8 +70,7 @@ export default function svgSprite(options = {}) {
         const symbols = [...loadedSvgs.values()].map((id) => convertedSvgs.get(id))
         const { data } = await svgo.optimize(createSprite(symbols))
 
-        await fs.ensureDir(outputFolder)
-        await fs.writeFile(`${outputFolder}/sprites.svg`, data)
+        await fs.outputFile(`${outputFolder}/sprites.svg`, data)
 
         loadedSvgs.clear()
       }
