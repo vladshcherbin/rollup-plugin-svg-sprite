@@ -67,7 +67,7 @@ export default function svgSprite(options = {}) {
     },
     async writeBundle() {
       if (loadedSvgs.size) {
-        const symbols = [...loadedSvgs.values()].map(id => convertedSvgs.get(id))
+        const symbols = [...loadedSvgs.values()].map((id) => convertedSvgs.get(id))
         const { data } = await svgo.optimize(createSprite(symbols))
 
         await fs.ensureDir(outputFolder)
